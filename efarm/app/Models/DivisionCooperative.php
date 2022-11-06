@@ -5,26 +5,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
 
-class Delegation extends Model
+class DivisionCooperative extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'region_id', 
-        'name', 
+        'cooperative_id',
+        'division_id',
         'address'
+    ];
+
+    protected $hidden = [
+        'region_id'
     ];
 
     protected $casts = [
         'address' => 'object'
     ];
 
-    public function region()
+    public function cooperative()
     {
-        $this->belongsTo(Region::class);
+        return $this->belongsTo(Cooperative::class);
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
     }
 }

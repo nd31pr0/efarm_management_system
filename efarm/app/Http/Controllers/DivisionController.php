@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Division;
+
 class DivisionController extends Controller
 {
     /**
@@ -13,17 +15,11 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $divisions = Division::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'divisions' => $divisions
+        ]);
     }
 
     /**
@@ -34,7 +30,13 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $division = Division::create($data);
+        
+        return response()->json([
+            'division' => $division
+        ]);
     }
 
     /**
@@ -45,19 +47,13 @@ class DivisionController extends Controller
      */
     public function show($id)
     {
-        //
+        $division = Division::find($id);
+        
+        return response()->json([
+            'division' => $division
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +64,13 @@ class DivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $division = Division::find($id)->update($data);
+        
+        return response()->json([
+            'division' => $division
+        ]);
     }
 
     /**
@@ -79,6 +81,10 @@ class DivisionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Division::destroy($id);
+
+        return response()->json([
+            'ok'
+        ]);
     }
 }

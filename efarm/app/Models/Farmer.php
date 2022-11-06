@@ -23,8 +23,8 @@ class Farmer extends Model
     ];
 
     protected $casts = [
-        'address' => 'array',
-        'dimensions' =>'array'
+        'address' => 'object',
+        'dimensions' =>'object'
     ];
 
 
@@ -35,11 +35,11 @@ class Farmer extends Model
 
     public function farms()
     {
-        return $this->hasMany(Farm::class)->where('owner','farmer');
+        return $this->hasMany(Farm::class,'owner_id','id')->where('owner','farmer');
     }
 
     public function cooperative()
     {
-        return $this->belongsTo(Cooperative::class);
+        return $this->belongsToMany(Cooperative::class);
     }
 }

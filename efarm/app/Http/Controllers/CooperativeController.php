@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Cooperative;
+
 class CooperativeController extends Controller
 {
     /**
@@ -13,17 +15,11 @@ class CooperativeController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $cooperatives = Cooperative::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'cooperatives' => $cooperatives
+        ]);
     }
 
     /**
@@ -34,7 +30,13 @@ class CooperativeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $cooperative = Cooperative::create($data);
+        
+        return response()->json([
+            'cooperative' => $cooperative
+        ]);
     }
 
     /**
@@ -45,19 +47,13 @@ class CooperativeController extends Controller
      */
     public function show($id)
     {
-        //
+        $cooperative = Cooperative::find($id);
+        
+        return response()->json([
+            'cooperative' => $cooperative
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +64,13 @@ class CooperativeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $cooperative = Cooperative::find($id)->update($data);
+        
+        return response()->json([
+            'cooperative' => $cooperative
+        ]);
     }
 
     /**
@@ -79,6 +81,10 @@ class CooperativeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cooperative::delete($id);
+
+        return response()->json([
+            'ok'
+        ]);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDelegationsTable extends Migration
+class CreateDivisionCooperativesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDelegationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('delegations', function (Blueprint $table) {
+        Schema::create('division_cooperatives', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('region_id')->unsigned();
-            $table->string('name');
+            $table->bigInteger('cooperative_id')->unsigned();
+            $table->bigInteger('division_id')->unsigned();
             $table->json('address')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateDelegationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delegations');
+        Schema::dropIfExists('division_cooperatives');
     }
 }

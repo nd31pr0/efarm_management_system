@@ -16,8 +16,8 @@ class CreateHumidityDataTable extends Migration
         Schema::create('humidity_data', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('farm_id')->unsigned();
-            $table->date('collection_date');
             $table->string('value');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

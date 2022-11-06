@@ -40,5 +40,34 @@ class Farm extends Model
                 return $this->belongsTo(Cooperative::class,'owner_id');
         }
     }
+
+    // public function farmer(){
+    //     if($this->owner == 'farmer'){
+    //        return $this->belongsTo(Farmer::class,'owner_id'); 
+    //     }
+    //     return null;
+    // }
+
+    // public function cooperative(){
+    //     if($this->owner == 'cooperative'){
+    //        return $this->belongsTo(Cooperative::class,'owner_id'); 
+    //     }
+    //     return null;
+    // }
+
+    public function soil_data()
+    {
+        return $this->hasMany(SoilData::class);
+    }
+
+    public function temperature_data()
+    {
+        return $this->hasMany(TemperatureData::class);
+    }
+
+    public function humidity_data()
+    {
+        return $this->hasMany(HumidityData::class);
+    }
     
 }

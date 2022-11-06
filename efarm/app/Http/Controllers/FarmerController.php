@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class FarmersController extends Controller
+use App\Models\Farmer;
+
+class FarmerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +15,11 @@ class FarmersController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $farmers = Farmer::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'farmers' => $farmers
+        ]);
     }
 
     /**
@@ -34,7 +30,13 @@ class FarmersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $farmer = Farmer::create($data);
+        
+        return response()->json([
+            'farmer' => $farmer
+        ]);
     }
 
     /**
@@ -45,19 +47,13 @@ class FarmersController extends Controller
      */
     public function show($id)
     {
-        //
+        $farmer = Farmer::find($id);
+        
+        return response()->json([
+            'farmer' => $farmer
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +64,13 @@ class FarmersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $farmer = Farmer::find($id)->update($data);
+        
+        return response()->json([
+            'farmer' => $farmer
+        ]);
     }
 
     /**
@@ -79,6 +81,10 @@ class FarmersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Farmer::delete($id);
+
+        return response()->json([
+            'ok'
+        ]);
     }
 }

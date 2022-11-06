@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Delegation;
+
 class DelegationController extends Controller
 {
     /**
@@ -13,17 +15,11 @@ class DelegationController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $delegations = Delegation::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'elegations' => $delegations
+        ]);
     }
 
     /**
@@ -34,7 +30,13 @@ class DelegationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $delegation = Delegation::create($data);
+        
+        return response()->json([
+            'delegation' => $delegation
+        ]);
     }
 
     /**
@@ -45,19 +47,13 @@ class DelegationController extends Controller
      */
     public function show($id)
     {
-        //
+        $delegation = Delegation::find($id);
+        
+        return response()->json([
+            'delegation' => $delegation
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +64,13 @@ class DelegationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $delegation = Delegation::find($id)->update($data);
+        
+        return response()->json([
+            'delegation' => $delegation
+        ]);
     }
 
     /**
@@ -79,6 +81,10 @@ class DelegationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Delegation::delete($id);
+
+        return response()->json([
+            'ok'
+        ]);
     }
 }

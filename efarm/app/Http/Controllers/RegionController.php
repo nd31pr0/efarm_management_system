@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Region;
+
 class RegionController extends Controller
 {
     /**
@@ -13,17 +15,11 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $regions = Region::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'regions' => $regions
+        ]);
     }
 
     /**
@@ -34,7 +30,13 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $region = Region::create($data);
+        
+        return response()->json([
+            'region' => $region
+        ]);
     }
 
     /**
@@ -45,19 +47,13 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        //
+        $region = Region::find($id);
+        
+        return response()->json([
+            'region' => $region
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +64,13 @@ class RegionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $region = Region::find($id)->update($data);
+        
+        return response()->json([
+            'region' => $region
+        ]);
     }
 
     /**
@@ -79,6 +81,10 @@ class RegionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Region::destroy($id);
+
+        return response()->json([
+            'ok'
+        ]);
     }
 }
