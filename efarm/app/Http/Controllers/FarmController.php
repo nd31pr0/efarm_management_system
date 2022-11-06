@@ -66,7 +66,8 @@ class FarmController extends Controller
     {
         $data = $request->all();
 
-        $farm = Farm::find($id)->update($data);
+        $farm = Farm::find($id);
+        $farm->update($data);
         
         return response()->json([
             'farm' => $farm

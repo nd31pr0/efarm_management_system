@@ -15,7 +15,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regions = Region::all();
+        $regions = Region::with('divisions')->get();
 
         return response()->json([
             'regions' => $regions
@@ -66,7 +66,9 @@ class RegionController extends Controller
     {
         $data = $request->all();
 
-        $region = Region::find($id)->update($data);
+        $region = Region::find($id);
+        
+        $region->update($data);
         
         return response()->json([
             'region' => $region

@@ -66,7 +66,8 @@ class CooperativeController extends Controller
     {
         $data = $request->all();
 
-        $cooperative = Cooperative::find($id)->update($data);
+        $cooperative = Cooperative::find($id);
+        $cooperative->update($data);
         
         return response()->json([
             'cooperative' => $cooperative

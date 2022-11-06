@@ -66,7 +66,8 @@ class DivisionController extends Controller
     {
         $data = $request->all();
 
-        $division = Division::find($id)->update($data);
+        $division = Division::find($id);
+        $division->update($data);
         
         return response()->json([
             'division' => $division

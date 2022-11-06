@@ -18,7 +18,7 @@ class DelegationController extends Controller
         $delegations = Delegation::all();
 
         return response()->json([
-            'elegations' => $delegations
+            'delegations' => $delegations
         ]);
     }
 
@@ -66,7 +66,8 @@ class DelegationController extends Controller
     {
         $data = $request->all();
 
-        $delegation = Delegation::find($id)->update($data);
+        $delegation = Delegation::find($id);
+        $delegation->update($data);
         
         return response()->json([
             'delegation' => $delegation

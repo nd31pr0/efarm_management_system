@@ -66,7 +66,9 @@ class FarmerController extends Controller
     {
         $data = $request->all();
 
-        $farmer = Farmer::find($id)->update($data);
+        $farmer = Farmer::find($id);
+        
+        $farmer->update($data);
         
         return response()->json([
             'farmer' => $farmer

@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\DelegationController;
+use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\CooperativeController;
+use App\Http\Controllers\FarmController;
 
 /*
 |--------------------------------------------------------------------------
